@@ -450,7 +450,7 @@ const dataWithAssociationNames = etablissement?.map((etablissement) => {
       </div>
     ))
   ) : (
-    <p>Pas d'établissements à afficher</p>
+    <p>Pas d&apos;établissements à afficher</p>
   )}
 </div>
 

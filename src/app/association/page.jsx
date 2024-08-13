@@ -6,11 +6,11 @@ import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import  { useEffect } from 'react';
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { useState ,useRef, useMemo} from "react";
-import { Editor } from 'react-draft-wysiwyg';
+
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Modal from "react-modal";
-import { ToastAction } from "/src/components/ui/toast"
-import JoditEditor from 'jodit-react';
+
+
 import { useToast } from "/src/components/ui/use-toast"
 import { useQuery } from "@tanstack/react-query";
 import Dropdown from "/src/components/dropdown";
