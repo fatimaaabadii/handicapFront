@@ -30,7 +30,7 @@ export default function Page() {
         duration: 2000,
         title: "نجاح",
       });
-      window.location.href = "/";
+      window.location.href = "/association";
     } catch (error) {
       toast({
         description: "فشل تسجيل الدخول",
@@ -69,7 +69,7 @@ export default function Page() {
         <div className="mb-8 flex justify-center">
           <Image src="/en.png" alt="شعار" width={100} height={20} />
         </div>
-        <h2 className="text-2xl text-center font-serif  mb-6">   برنامج دعم الجمعيات العاملة في مجال الإعاقة</h2>
+        <h2 className="text-2xl text-center font-serif  mb-6">    برنامج تحسين تمدرس الأطفال في وضعية إعاقة</h2>
         <h3 className="text-xl  font-serif text-center mb-4">تسجيل الدخول</h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

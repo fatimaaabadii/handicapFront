@@ -85,7 +85,7 @@ export function DataTable({
   };
 
   return (
-    <div className="w-full my-6">
+    <div className="w-2/3 my-4 mx-auto text-center">
       <h1 style={{ fontFamily: 'Roboto, sans-serif', fontSize: '1.5rem', fontWeight: 'bold', color: '#333', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.2)', paddingBottom: '10px', borderBottom: '2px solid #ccc' }}>
         {title}
       </h1>
@@ -95,7 +95,7 @@ export function DataTable({
           {filterCols.map((col) => (
             <Input
               key={col}
-              placeholder={`بحث في ${col}`}
+              placeholder={`بحث  `}
               value={columnFilters.find(filter => filter.id === col)?.value || ""}
               onChange={(event) =>
                 setColumnFilters((oldFilters) => [
@@ -157,7 +157,7 @@ export function DataTable({
               <TableRow key={headerGroup.id} style={{ backgroundColor: 'transparent' }}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} style={{ color: '#333', fontSize: '16px', fontWeight: 'bold', fontFamily: 'Nunito, sans-serif',  textAlign: 'right',  }}>
+                    <TableHead key={header.id} style={{ color: '#333', fontSize: '16px', fontWeight: 'bold', fontFamily: 'Nunito, sans-serif',  textAlign: 'center',  }}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(

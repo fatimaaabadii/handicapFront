@@ -173,6 +173,7 @@ const [data, setData] = useState([]);
     },
     {
       accessorKey: "deleguation.name",
+      id:"delegation",
       header: "المندوبية ",
       cell: ({ row }) => (
         <div className="capitalize rtl:text-right"> {row.original?.deleguation?.name}</div>
@@ -718,7 +719,7 @@ const [data, setData] = useState([]);
       </Modal>
       <DataTable
         title={"معلومات حول الجمعيات "}
-        filterCol="name"
+        filterCol="delegation"
         columns={delegationColumns}
         //filteredData
         data={data || []}
