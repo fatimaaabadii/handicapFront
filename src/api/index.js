@@ -2,8 +2,8 @@ import axios from "axios";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 
 const client = axios.create({
-   // baseURL: "http://154.144.246.177:8031",
-   baseURL: "http://localhost:8080",
+   baseURL: "http://154.144.246.177:8031",
+   //baseURL: "http://localhost:8080",
     headers: {
         "Content-Type": "application/json",
     },

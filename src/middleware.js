@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-//const baseURL = "http://172.16.20.48:81";
-const baseURL = "http://localhost:8080";
+const baseURL = "http://172.16.20.48:81";
+//const baseURL = "http://localhost:8080";
 export async function middleware(request) {
   const authRoutes = ["/login"];
   const { pathname } = request.nextUrl;
