@@ -30,17 +30,16 @@ export function DataTable({
   title,
   columns,
   data,
-  filterCols, // Modifié pour accepter un tableau de colonnes à filtrer
+  filterCols,
   canAdd = false,
   setOpenModal,
   settypeOfSubmit,
 }) {
-  const [sorting, setSorting] = React.useState([{ id: 'id', desc: true }]); // Tri par défaut du plus récent au plus ancien
+  const [sorting, setSorting] = React.useState([{ id: 'id', desc: true }]);
   const [columnFilters, setColumnFilters] = React.useState([]);
-  const [columnVisibility, setColumnVisibility] = React.useState({ id: false }); // Masquer la colonne id par défaut
+  const [columnVisibility, setColumnVisibility] = React.useState({ id: false });
   const [rowSelection, setRowSelection] = React.useState({});
 
-  // Ajout de la colonne id pour le tri
   const extendedColumns = React.useMemo(() => [
     {
       id: 'id',
@@ -72,15 +71,15 @@ export function DataTable({
   });
 
   const buttonStyle = {
-    backgroundColor: '#6B7280', // Couleur de fond
-    color: '#fff', // Couleur du texte
-    border: '1px solid #6B7280', // Bordure
-    borderRadius: '4px', // Bords arrondis
+    backgroundColor: '#6B7280',
+    color: '#fff',
+    border: '1px solid #6B7280',
+    borderRadius: '4px',
     padding: '10px 20px',
     fontSize: '16px',
-    fontWeight: 'bold', // Texte en gras
+    fontWeight: 'bold',
     cursor: 'pointer',
-    transition: 'background-color 0.3s, color 0.3s, border-color 0.3s', // Effets de transition
+    transition: 'background-color 0.3s, color 0.3s, border-color 0.3s',
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
   };
 
@@ -109,7 +108,7 @@ export function DataTable({
                 border: '1px solid #ccc',
                 borderRadius: '4px',
                 boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                width: '300px', // Vous pouvez ajuster la largeur selon vos besoins
+                width: '300px',
               }}
             />
           ))}
@@ -201,25 +200,25 @@ export function DataTable({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground"></div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            السابق
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            التالي
-          </Button>
-        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          السابق
+        </Button>
+        <span className="text-sm text-muted-foreground" style={{ margin: '0 8px' }}>
+         {table.getState().pagination.pageIndex + 1}/{table.getPageCount()}
+         </span>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          التالي
+        </Button>
       </div>
     </div>
   );
