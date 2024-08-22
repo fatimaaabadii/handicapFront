@@ -349,20 +349,24 @@ const dataWithAssociationNames = etablissement?.map((etablissement) => {
       try {
         const parsedSelectedValue = {
           ...selectedValue,
-        
-          etablissements: []
+          etablissements: selectedValue.etablissements.map(etablissement => ({
+            ...etablissement,
+            name: etablissement.name.trim() 
+          }))
         };
         
-        console.log('Données envoyées au serveur:', selectedValue);
+        
+        console.log('Données envoyées au serveur:', parsedSelectedValue);
        // console.log(selectedValue);
       const response = await api.put("/association/update/"+ selectedValue.id, 
-          selectedValue, {
+        parsedSelectedValue, {
             headers: headers
                  
                 })
+                console.log(response);
           
         
-        refetch()
+                refetchAssociation()
         toast({
           description: "تم تحديث المعلومات بنجاح",
           className: "bg-green-500 text-white",
@@ -381,7 +385,6 @@ const dataWithAssociationNames = etablissement?.map((etablissement) => {
     }
   
   }
-
 
   const options2 = [
     { value: 'academic-year', label: 'سنة دراسية' },

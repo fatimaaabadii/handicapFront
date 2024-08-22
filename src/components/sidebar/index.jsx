@@ -14,7 +14,7 @@ import { FaAddressBook } from 'react-icons/fa';
 import { FaFolderOpen } from 'react-icons/fa';
 import { FaBookReader    } from 'react-icons/fa';
 import {FaUserGraduate,FaBuilding , FaBook, FaNewspaper , FaFileAlt ,FaFeatherAlt , FaCheckCircle, FaClipboardList , 
-  FaHandHoldingHeart,FaPeopleArrows ,FaHandshake , FaHandsHelping , FaBriefcase, FaUserCircle} from 'react-icons/fa';
+  FaHandHoldingHeart,FaPeopleArrows ,FaHandshake , FaHandsHelping , FaBriefcase, FaUserCircle, FaChartBar} from 'react-icons/fa';
 import { setCookie, deleteCookie } from "cookies-next";
 import Image from 'next/image';
 const Sidebar = () => {
@@ -53,6 +53,7 @@ const Sidebar = () => {
      
     <nav className="flex items-center justify-between bg-gray-700 text-white h-20 px-6">
       <img src="en.png" alt="Logo" className="h-10" />
+{(userData?.roles === "ADMIN_ROLES" && (
      <div className="flex items-center">
             <Link
               href="/"
@@ -66,6 +67,26 @@ const Sidebar = () => {
               </span>
             </Link>
             </div>
+ ))}
+
+
+{(userData?.roles !== "ADMIN_ROLES" && (
+             <div className="flex items-center">
+         
+         <Link
+           href="/statistiques"
+           className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-white hover:text-gray-800 border-l-4 border-transparent hover:border-gray-500 pr-6"
+         >
+           <span className="inline-flex justify-center items-center ml-4">
+           <FaChartBar className="w-8 h-4" />
+           </span>
+           <span className="ml-2 text-sm tracking-wide truncate">
+           إحصائيات
+           </span>
+         </Link>
+       
+      </div>))}
+
             <div className="flex items-center">
          
             <Link

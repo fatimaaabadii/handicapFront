@@ -2,7 +2,7 @@ import axios from "axios";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 
 const client = axios.create({
-    baseURL: "http://172.16.20.48:81",
+   baseURL: "http://154.144.246.177:8031",
   // baseURL: "http://localhost:8080",
     headers: {
         "Content-Type": "application/json",
@@ -16,8 +16,8 @@ client.interceptors.response.use(
             console.log('error 401');
         } if (error.response.status === 403) {
             console.log('error 403');
-          // deleteCookie('token');
-          // window.location.href = '/login';
+           deleteCookie('token');
+           window.location.href = '/login';
         }
         return Promise.reject(error);
     }

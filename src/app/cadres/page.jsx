@@ -73,8 +73,11 @@ const { data: cadres } = useQuery({
   queryFn: getCadres(),
 });
 
-
-
+  const { data: AssociationByDele, refetch: refetchAsso} = useQuery({
+    queryKey: ['AssociationByDele', userData?.province?.name],
+    queryFn: () => getAssociationsByDele(userData?.province?.name),
+    enabled: !!userData?.province?.name, 
+});
 
 
 
@@ -103,7 +106,7 @@ const { data: CadresByDele, refetch: refetch, isLoading, isError } = useQuery({
   queryKey: ['associations'],
   queryFn: getAssociations(),
 });
-
+console.log(data);
 const { data: specialite,} = useQuery({
   queryKey: ['specialite'],
   queryFn: getSpecialite(),
@@ -154,6 +157,7 @@ const options4 = (specialite || []).map(specialite => ({
     {
       accessorKey: "province.name",
       header: "المندوبية ",
+      id:"المندوبيات",
       cell: ({ row }) => (
         <div className="capitalize rtl:text-right"> {row.original.province.name}</div>
       ),
@@ -161,6 +165,7 @@ const options4 = (specialite || []).map(specialite => ({
     {
       accessorKey: "association.name",
       header: " إسم الجمعية " ,
+      id : "الجمعيات",
       cell: ({ row }) => (
         <div className="capitalize rtl:text-right">{row.original.association.name}</div>
       
@@ -169,9 +174,10 @@ const options4 = (specialite || []).map(specialite => ({
     
     {
       accessorKey: "fullName",
-      header: "   إسم الإطار",
+      header: " إسم الإطار",
+      id :  "إسم الإطار",
       cell: ({ row }) => (
-        <div className="capitalize  rtl:text-right">{row.getValue("fullName")}</div>
+        <div className="capitalize  rtl:text-right">{row.original.fullName}</div>
       ),
     },
    
@@ -508,7 +514,7 @@ const options4 = (specialite || []).map(specialite => ({
   </label>
   <Select
     id="association.name"
-    options={associations?.map(assoc => ({
+    options={AssociationByDele?.map(assoc => ({
       value: assoc.id,
       label: assoc.name
     }))}
@@ -575,11 +581,17 @@ const options4 = (specialite || []).map(specialite => ({
     options={[
       { value: 'حصة أسبوعية كاملة' , label: 'حصة أسبوعية كاملة' },
       { value: 'نصف حصة أسبوعية', label: 'نصف حصة أسبوعية' },
-      { value: 'ربع حصة أسبوعية' , label: 'ربع حصة أسبوعية' }
+      { value: 'ربع حصة أسبوعية' , label: 'ربع حصة أسبوعية' },
+
+      { value: 'متطوع', label: 'متطوع' },
+      { value:  'موضوع رهن الإشارة', label: 'موضوع رهن الإشارة' }
     ]}
     value={[
       { value: 'حصة أسبوعية كاملة', label: 'حصة أسبوعية كاملة' },
       { value: 'نصف حصة أسبوعية' , label: 'نصف حصة أسبوعية' },
+      { value: 'موضوع رهن الإشارة', label: 'موضوع رهن الإشارة' },
+
+      { value: 'متطوع', label: 'متطوع' },
       { value: 'ربع حصة أسبوعية', label: 'ربع حصة أسبوعية' }
     ].find(option => option.label === selectedValue?.contrat) || ""}
     onChange={handleSelectChange1}
@@ -672,7 +684,9 @@ const options4 = (specialite || []).map(specialite => ({
       </Modal>
       <DataTable
         title={"  أطر الجمعيات  "}
-        filterCol="fullName"
+        filterCols={[ 'المندوبيات', 'الجمعيات', 'إسم الإطار']}
+        
+      
         columns={delegationColumns}
         //filteredData
         data={data || []}

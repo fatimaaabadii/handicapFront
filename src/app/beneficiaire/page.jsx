@@ -283,6 +283,7 @@ console.log(BeneByDele);
     },
     {
       accessorKey: "province.name",
+      id:"المندوبيات",
       header: "المندوبية ",
       cell: ({ row }) => (
         <div className="capitalize rtl:text-right"> {row.original.province?.name}</div>
@@ -292,6 +293,7 @@ console.log(BeneByDele);
 
     {
       accessorKey: "association.name",
+      id : "الجمعيات",
       header: " اسم الجمعية " ,
       cell: ({ row }) => (
         <div className="capitalize  rtl:text-right">{row.original.association?.name}</div>
@@ -311,8 +313,9 @@ console.log(BeneByDele);
     {
       accessorKey: "fullName",
       header: "  اسم المستفيد",
+      id:"أسماء المستفيدين",
       cell: ({ row }) => (
-        <div className="capitalize  rtl:text-right">{row.getValue("fullName")}</div>
+        <div className="capitalize  rtl:text-right">{row.original.fullName}</div>
       ),
     },
 
@@ -334,6 +337,7 @@ console.log(BeneByDele);
    
   {
     accessorKey: "programme.programmeName",
+    id:"البرامج",
     header: " نوع البرنامج " ,
     cell: ({ row }) => (
       <div className="capitalize rtl:text-right">{row.original.programme?.programmeName}</div>
@@ -803,7 +807,7 @@ console.log(BeneByDele);
   </label>
   <Select
     id="association.name"
-    options={associations?.map(assoc => ({
+    options={AssociationByDele?.map(assoc => ({
       value: assoc.id,
       label: assoc.name
     }))}
@@ -948,7 +952,7 @@ console.log(BeneByDele);
       </Modal>
       <DataTable
         title={" المستفيدين "}
-        filterCol="fullName"
+        filterCols={[ 'المندوبيات', 'الجمعيات', 'البرامج','أسماء المستفيدين']}
         columns={delegationColumns}
         //filteredData
         data={data || []}
