@@ -479,7 +479,7 @@ console.log(BeneByDele);
   };
   
   
-  //console.log(articles);
+  console.log("hi",selectedValue);
   function closeModal() {
     setIsOpen(false);
   }
@@ -532,12 +532,17 @@ console.log(BeneByDele);
     else if (typeOfSubmit === "update" ) {
       
       try {
-       
+        
+          const parsedSelectedValue = {
+            ...selectedValue,
+            etablissement:selectedValue.etablissement, 
+            province:selectedDelegationn
+          };
         
         console.log('Données envoyées au serveur:', selectedValue);
        // console.log(selectedValue);
         const response = await api.put("/beneficiaire/update/"+ selectedValue.id, 
-        selectedValue, {
+          parsedSelectedValue, {
             headers: headers
                  
                 })
@@ -687,14 +692,24 @@ console.log(BeneByDele);
 
 
     const handleSelectChangeEta = (selectedOption) => {
-      setselectedValue({
-        ...selectedValue,
-        etablissements: selectedOption ? {
-          id: selectedOption.value,
-          name: selectedOption.label
-        } : undefined
+      setselectedValue(prevState => {
+        const newValue = {
+          ...prevState,
+          etablissement: selectedOption ? {
+            id: selectedOption.value,
+            name: selectedOption.label
+          } : undefined
+        };
+        console.log('Updated selectedValue:', newValue);
+        return newValue;
       });
     };
+
+
+
+   
+
+
   return (
     
     <div className="px-10 py-4" id="Subs">
@@ -835,7 +850,7 @@ console.log(BeneByDele);
     value={selectedValue?.etablissement ? {
       value: selectedValue.etablissement.id,
       label: selectedValue.etablissement.name
-    } : selectedValue?.etablissement?.name}
+    } : null}
     onChange={handleSelectChangeEta}
     placeholder="اختر المؤسسة"
     className="w-full"
@@ -952,7 +967,11 @@ console.log(BeneByDele);
       </Modal>
       <DataTable
         title={" المستفيدين "}
+
         filterCols={[ 'المندوبيات', 'الجمعيات', 'البرامج','أسماء المستفيدين']}
+
+       // filterCols={[ 'المندوبيات', 'الجمعيات', 'البرامج']}
+
         columns={delegationColumns}
         //filteredData
         data={data || []}
