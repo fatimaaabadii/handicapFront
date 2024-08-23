@@ -495,7 +495,7 @@ console.log(BeneByDele);
       try {
         const parsedSelectedValue = {
           ...selectedValue,
-          etablissement:selectedValue.etablissements, 
+          etablissement:selectedValue.etablissement, 
           province:selectedDelegationn
         };
         //formData.append('article', parsedSelectedValue);
