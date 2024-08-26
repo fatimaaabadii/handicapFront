@@ -324,7 +324,7 @@ const options4 = (specialite || []).map(specialite => ({
     }
             }
         
-       )
+      )
         openModal()
         refetch()
         toast({
@@ -394,7 +394,7 @@ const options4 = (specialite || []).map(specialite => ({
   };
 
 
-  const handleSelectChange2 = (selectedOption) => {
+  /*const handleSelectChange2 = (selectedOption) => {
     setselectedValue(prevState => ({
       ...prevState,
       cnss: selectedOption ? selectedOption.value : ''
@@ -405,6 +405,24 @@ const options4 = (specialite || []).map(specialite => ({
     setselectedValue(prevState => ({
       ...prevState,
       fraisCnss: selectedOption ? selectedOption.value : ''
+    }));
+  };*/
+
+
+  const handleSelectChange2 = (selectedOption) => {
+    setselectedValue(prevState => ({
+      ...prevState,
+      cnss: selectedOption ? selectedOption.value : '',
+      fraisCnss: selectedOption?.value === 'لا' ? 'لا' : prevState.fraisCnss,
+      montantAnnuel: selectedOption?.value === 'لا' ? '' : prevState.montantAnnuel,
+    }));
+  };
+  
+  const handleSelectChange3 = (selectedOption) => {
+    setselectedValue(prevState => ({
+      ...prevState,
+      fraisCnss: selectedOption ? selectedOption.value : '',
+      montantAnnuel: selectedOption?.value === 'لا' ? '' : prevState.montantAnnuel,
     }));
   };
   // Fonction pour gérer les changements dans le sélecteur
@@ -600,22 +618,26 @@ const options4 = (specialite || []).map(specialite => ({
     required
   />
 </div>
+
+
+
+
+
+
+
 <div className="px-6 mb-4 flex flex-col w-full">
   <label className="block mb-1" htmlFor="cnss">
-  التصريح بالصندوق الوطني
-  للضمان الاجتماعي CNSS
+    التصريح بالصندوق الوطني للضمان الاجتماعي CNSS
   </label>
   <Select
     id="cnss"
     options={[
-      { value: 'نعم', label: 'نعم'},
+      { value: 'نعم', label: 'نعم' },
       { value: 'لا', label: 'لا' },
-      
     ]}
     value={[
-      { value: 'نعم', label: 'نعم'},
+      { value: 'نعم', label: 'نعم' },
       { value: 'لا', label: 'لا' },
-      
     ].find(option => option.label === selectedValue?.cnss) || ""}
     onChange={handleSelectChange2}
     placeholder=" "
@@ -623,39 +645,32 @@ const options4 = (specialite || []).map(specialite => ({
     required
   />
 </div>
+
 <div className="px-6 mb-4 flex flex-col w-full">
   <label className="block mb-1" htmlFor="fraisCnss">
-  يتم تأدية مصاريف الصندوق 
-الوطني للضمان الاجتماعي  CNSS للاطر 
-المصرح بها من دعم برنامج تحسين 
-ظروف تمدرس الأطفال في وضعية إعاقة 
+    يتم تأدية مصاريف الصندوق الوطني للضمان الاجتماعي CNSS للاطر المصرح بها من دعم برنامج تحسين ظروف تمدرس الأطفال في وضعية إعاقة
   </label>
   <Select
     id="fraisCnss"
     options={[
-      { value: 'نعم', label: 'نعم'},
+      { value: 'نعم', label: 'نعم' },
       { value: 'لا', label: 'لا' },
-      
     ]}
     value={[
-      { value: 'نعم', label: 'نعم'},
+      { value: 'نعم', label: 'نعم' },
       { value: 'لا', label: 'لا' },
-      
     ].find(option => option.label === selectedValue?.fraisCnss) || ""}
     onChange={handleSelectChange3}
     placeholder=" "
     className="w-full"
     required
+    isDisabled={selectedValue?.cnss === 'لا'}
   />
 </div>
 
-   
-
-
-
 <div className="px-6 mb-4 flex flex-col w-full">
   <label className="block mb-1" htmlFor="montantAnnuel">
-  المبلغ الإجمالي السنوي المأدى للصندوق الوطني للضمان الاجتماعي عن الإطار(خاص بالبرنامج) 
+    المبلغ الإجمالي السنوي المأدى للصندوق الوطني للضمان الاجتماعي عن الإطار(خاص بالبرنامج)
   </label>
   <input
     className="w-full border rounded-md px-3 py-2"
@@ -670,6 +685,7 @@ const options4 = (specialite || []).map(specialite => ({
       });
     }}
     required
+    disabled={selectedValue?.cnss === 'لا' || selectedValue?.fraisCnss === 'لا'}
   />
 </div>
 

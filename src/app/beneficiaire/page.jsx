@@ -155,10 +155,17 @@ console.log(BeneByDele);
   }));
 
 
-  const options4 = (programme || []).map(programme => ({
+ /* const options4 = (programme || []).map(programme => ({
     value: programme.id,
     label: programme.programmeName, // Assurez-vous que vous avez un champ `programmeName` ou remplacez-le par le champ approprié
-  }));
+  }));*/
+
+  const options4 = [
+    { value: 1, label: 'A' },
+    { value: 2, label: 'B' },
+    { value: 3, label: 'C' },
+  
+  ];
 
   const options3 = (associations || []).map(asso => ({
     value: asso.id,
@@ -495,7 +502,7 @@ console.log(BeneByDele);
       try {
         const parsedSelectedValue = {
           ...selectedValue,
-          etablissement:selectedValue.etablissements, 
+          etablissement:selectedValue.etablissement, 
           province:selectedDelegationn
         };
         //formData.append('article', parsedSelectedValue);
